@@ -1,0 +1,24 @@
+---
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Realtime Swedish Railway API
+schemes:
+  - http
+tags: 
+  - name: Health
+basePath: /api
+paths:
+  /health:
+    get:
+      operationId: healthcheck
+      x-mojo-to: "health#healthcheck"
+      summary: API Healthcheck
+      description: Endpoint to check current status of the API.
+      tags: 
+        - Health
+      responses:
+        200:
+          description: API status is healthly.
+          schema:
+            type: object
