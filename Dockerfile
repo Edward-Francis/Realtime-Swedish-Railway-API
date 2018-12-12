@@ -9,4 +9,8 @@ RUN apk add --update --no-cache --virtual=.build-dependencies build-base wget cu
     && apk del .build-dependencies \
     && rm -rf /root/.cpanm/* /usr/local/share/man/*
 
-CMD ["perl", "-MMojolicious::Lite", "-E", "get '/' =>sub { shift->render(text =>'OK!') }; app->start", "daemon"]
+COPY app/ /opt/
+
+WORKDIR /opt
+
+CMD [ "/usr/local/bin/morbo", "./script/rsr" ]
