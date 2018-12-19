@@ -9,7 +9,7 @@ use Mojo::Base -base;
 # ATTRIBUTES
 
 has 'authentication_key' => sub {
-    $ENV{AUTENTICATION_KEY} or croak 'Authentication key is required.';
+    $ENV{TRAFIK_INFO_AUTH_KEY} or croak 'Trafik Info Auth key is required.';
 };
 
 has 'trafik_info_url' => sub {
