@@ -1,6 +1,6 @@
 FROM alpine:3.8
 
-COPY cpanfile /
+COPY app/cpanfile /
 
 RUN apk add --update --no-cache --virtual=.build-dependencies build-base wget curl perl-dev \
     && apk add --update --no-cache perl \

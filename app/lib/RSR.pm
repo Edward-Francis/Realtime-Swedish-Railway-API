@@ -1,5 +1,6 @@
 package RSR;
 
+use TrafikInfo ();
 use Mojo::Base 'Mojolicious';
 
 =head1 NAME
@@ -18,6 +19,9 @@ sub startup {
     my $self = shift;
     $self->plugin(
         OpenAPI => { spec => $self->static->file('api.yaml')->path } );
+
+    # add helpers
+    $self->helper( trafik_info => sub { return TrafikInfo->new });
 }
 
 
