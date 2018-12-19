@@ -7,6 +7,7 @@ schemes:
   - http
 tags: 
   - name: Health
+  - name: Station
 basePath: /api
 paths:
   /health:
@@ -22,3 +23,28 @@ paths:
           description: API status is healthly.
           schema:
             type: object
+
+  /stations:
+    get:
+      operationId: stationList
+      x-mojo-to: "stations#list"
+      summary: List of Stations
+      description: A list of stations served by Swedish Railways.
+      tags:
+        - Station
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                code:
+                  type: string
+                country_code:
+                  type: string
+                name:
+                  type: string
+                short_name:
+                  type: string

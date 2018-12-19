@@ -17,6 +17,35 @@ has 'trafik_info_url' => sub {
 };
 
 
+# METHODS
+
+
+sub station_list {
+    my $self = $_[0];
+
+    my $response = $self->_make_request(
+        '<QUERY objecttype="TrainStation">
+            <FILTER><EQ name="Advertised" value="true"/></FILTER>
+            <INCLUDE>AdvertisedLocationName</INCLUDE>
+            <INCLUDE>AdvertisedShortLocationName</INCLUDE>
+            <INCLUDE>CountryCode</INCLUDE>
+            <INCLUDE>LocationSignature</INCLUDE>
+        </QUERY>'
+    );
+
+    my @stations = map {
+        {
+            name         => $_->{AdvertisedLocationName},
+            short_name   => $_->{AdvertisedShortLocationName},
+            country_code => $_->{CountryCode},
+            code         => $_->{LocationSignature},
+        }
+    } @{$response->{RESPONSE}->{RESULT}->[0]->{TrainStation}};
+
+    return \@stations;
+}
+
+
 # PRIVATE METHODS
 
 sub _make_request {
